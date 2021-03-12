@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "stage_init.h"
 
 const int STAGE_TOTAL = 1;
 
