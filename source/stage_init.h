@@ -1,6 +1,11 @@
 //header file for stage_init
 
-class fixture;
-class player;
+class fixture {
+  //class for storing stage fixtures
+};
+
+class player {
+  //class for storing player sprite and acceleration
+};
 
 fixture** stageInit();
