@@ -6,6 +6,7 @@
 
 const int STAGE_TOTAL = 1;
 
+void drawGame(sf::RenderWindow&, fixture**, player&, int);
 
 int main()
 {
@@ -41,9 +42,13 @@ int main()
 
     window.clear();
     //draws all game elements in their updated positions
-    //drawGame(window, stages, p1, stageOn)
+    drawGame(window, stages, p1, stageOn);
     window.display();
   }
 
   return 0;
+}
+
+void drawGame(sf::RenderWindow& window, fixture** stages, player& p1, int stageOn) {
+  //draws game elements using window.draw
 }
