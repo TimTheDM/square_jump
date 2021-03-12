@@ -2,6 +2,7 @@
 #include<SFML/Graphics.hpp>
 #include "stage_init.h"
 #include "movement.h"
+#include "collision.h"
 //where control is passed each game loop to check if a key is pressed
 //calls movement functions, and uses functions from collision
 

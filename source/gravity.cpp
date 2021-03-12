@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "stage_init.h"
+#include "collision.h"
 //Includes functions for changing acceleration while midair
 
 void gravity(fixture**, player&, int);

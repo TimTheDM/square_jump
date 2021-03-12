@@ -411,24 +411,37 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1615528328 source:c:\projects\cube_jump\source\main.cpp
+1615533095 source:c:\projects\cube_jump\source\main.cpp
 	<SFML/Graphics.hpp>
 	"stage_init.h"
+	"movement.h"
+	"gravity.h"
+	"collision.h"
 
 1615530057 c:\projects\cube_jump\source\stage_init.h
 
 1615530054 source:c:\projects\cube_jump\source\stage_init.cpp
 	"stage_init.h"
 
-1615529851 source:c:\projects\cube_jump\source\movement.cpp
+1615532973 source:c:\projects\cube_jump\source\movement.cpp
 	<iostream>
 	<SFML/Graphics.hpp>
 	"stage_init.h"
 	"movement.h"
+	"collision.h"
 
 1615529824 c:\projects\cube_jump\source\movement.h
 
-1615531672 source:c:\projects\cube_jump\source\gravity.cpp
+1615532901 source:c:\projects\cube_jump\source\gravity.cpp
 	<SFML/Graphics.hpp>
 	"stage_init.h"
+	"collision.h"
+
+1615533052 source:c:\projects\cube_jump\source\collision.cpp
+	<SFML/Graphics.hpp>
+	"stage_init.h"
+
+1615533073 c:\projects\cube_jump\source\collision.h
+
+1615531691 c:\projects\cube_jump\source\gravity.h
 

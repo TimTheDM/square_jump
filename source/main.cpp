@@ -2,6 +2,7 @@
 #include "stage_init.h"
 #include "movement.h"
 #include "gravity.h"
+#include "collision.h"
 
 const int STAGE_TOTAL = 1;
 
@@ -36,7 +37,7 @@ int main()
     //Checks if the player object has collided with a hazard or winPoint type fixture
     //Calls a function to change player position to start point if it does, and increments stageOn
     //If the colliding fixture was a win point type
-    //stateCheck(stages, p1, stageOn);
+    stateCheck(stages, p1, stageOn);
 
     window.clear();
     //draws all game elements in their updated positions
