@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "stage_init.h"
 #include "movement.h"
+#include "gravity.h"
 
 const int STAGE_TOTAL = 1;
 
@@ -30,7 +31,7 @@ int main()
     //calls gravity function, which changes acceleration of member var of player object
     //depending on results of collision checks and existing acceleration variable
     //gravity then displaces player objects sprite member
-    //gravity(stages, p1, stageOn);
+    gravity(stages, p1, stageOn);
     
     //Checks if the player object has collided with a hazard or winPoint type fixture
     //Calls a function to change player position to start point if it does, and increments stageOn
