@@ -1,8 +1,9 @@
+#include<vector>
 #include "stage_init.h"
 
-fixture** stageInit();
+std::vector<fixture>* stageInit();
 
-fixture** stageInit() {
+std::vector<fixture>* stageInit() {
   //where the fixtures and their positions will be set
-  return new fixture*[5];
+  return new std::vector<fixture>[5];
 }

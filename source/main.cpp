@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <vector>
 #include "stage_init.h"
 #include "movement.h"
 #include "gravity.h"
@@ -6,7 +7,7 @@
 
 const int STAGE_TOTAL = 1;
 
-void drawGame(sf::RenderWindow&, fixture**, player&, int);
+void drawGame(sf::RenderWindow&, std::vector<fixture>*, player&, int);
 
 int main()
 {
@@ -14,7 +15,7 @@ int main()
   window.setFramerateLimit(30);
 
   //class named fixture is what each platform, hazard, and win point is in a stage represented
-  fixture** stages = stageInit();
+  std::vector<fixture>* stages = stageInit();
   int stageOn = 0;
   //calls constructor for object representing players controlled square
   player p1;
@@ -49,6 +50,6 @@ int main()
   return 0;
 }
 
-void drawGame(sf::RenderWindow& window, fixture** stages, player& p1, int stageOn) {
+void drawGame(sf::RenderWindow& window, std::vector<fixture>* stages, player& p1, int stageOn) {
   //draws game elements using window.draw
 }

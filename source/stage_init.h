@@ -8,4 +8,4 @@ class player {
   //class for storing player sprite and acceleration
 };
 
-fixture** stageInit();
+std::vector<fixture>* stageInit();

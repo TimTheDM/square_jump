@@ -1,1 +1,1 @@
-void gravity(fixture**, player&, int);
+void gravity(std::vector<fixture>*, player&, int);

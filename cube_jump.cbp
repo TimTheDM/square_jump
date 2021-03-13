@@ -28,7 +28,15 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="source/collision.cpp" />
+		<Unit filename="source/collision.h" />
+		<Unit filename="source/gravity.cpp" />
+		<Unit filename="source/gravity.h" />
 		<Unit filename="source/main.cpp" />
+		<Unit filename="source/movement.cpp" />
+		<Unit filename="source/movement.h" />
+		<Unit filename="source/stage_init.cpp" />
+		<Unit filename="source/stage_init.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -1,3 +1,3 @@
-void pressCheck(fixture**, player&, int);
-void sideMove(char, fixture**, player&, int);
+void pressCheck(std::vector<fixture>*, player&, int);
+void sideMove(char, std::vector<fixture>*, player&, int);
 void jump(player&);
