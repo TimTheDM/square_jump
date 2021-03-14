@@ -5,8 +5,9 @@
 std::vector<fixture>* stageInit();
 
 std::vector<fixture>* stageInit() {
-  //where the fixtures and their positions will be set
-  return new std::vector<fixture>[5];
+  std::vector<fixture>* stages = new std::vector<fixture>[STAGE_TOTAL];
+  stages[0] = collisionPlayground();
+  return stages;
 }
 
 player::player() {
@@ -27,4 +28,9 @@ fixture::fixture(bool isHazard, bool isWinPoint, sf::Texture& hazardText, sf::Ve
     sf::RectangleShape placeholder(squareDimension);
     this->platform = placeholder;
   }
+}
+
+std::vector<fixture> collisionPlayground() {
+  std::vector<fixture> cPlayground;
+  return cPlayground;
 }

@@ -5,7 +5,6 @@
 #include "gravity.h"
 #include "collision.h"
 
-const int STAGE_TOTAL = 1;
 
 void drawGame(sf::RenderWindow&, std::vector<fixture>*, player&, int);
 

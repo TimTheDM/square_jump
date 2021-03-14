@@ -1,6 +1,7 @@
 //header file for stage_init
 
 const int PLAYER_SIZE = 50;
+const int STAGE_TOTAL = 1;
 
 class fixture {
   public:
@@ -21,3 +22,4 @@ class player {
 };
 
 std::vector<fixture>* stageInit();
+std::vector<fixture> collisionPlayground();
