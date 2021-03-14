@@ -9,7 +9,7 @@ class fixture {
     sf::Sprite hazard;
     bool isHazard;
     bool isWinPoint;
-    fixture(bool, bool, sf::Texture&, sf::Vector2f&);
+    fixture(bool, bool, sf::Texture&, int, int, int, int);
     sf::RectangleShape* getPlatform();
     sf::Sprite* getHazard();
 };

@@ -16,16 +16,19 @@ player::player() {
   this->pSprite = pSprite;
 }
 
-fixture::fixture(bool isHazard, bool isWinPoint, sf::Texture& hazardText, sf::Vector2f& squareDimension) {
+fixture::fixture(bool isHazard, bool isWinPoint, sf::Texture& hazardText, int width, int length, int xOffset, int yOffset) {
   this->isHazard = isHazard;
   this->isWinPoint = isWinPoint;
 
   if(isHazard) {
     sf::Sprite placeholder;
     placeholder.setTexture(hazardText);
+    placeholder.setPosition(xOffset, yOffset);
     this->hazard = placeholder;
   } else {
-    sf::RectangleShape placeholder(squareDimension);
+    sf::RectangleShape placeholder(sf::Vector2f(width, length));
+    placeholder.setPosition(xOffset, yOffset);
+    placeholder.setFillColor(sf::Color(255, 255, 0));
     this->platform = placeholder;
   }
 }
@@ -33,8 +36,7 @@ fixture::fixture(bool isHazard, bool isWinPoint, sf::Texture& hazardText, sf::Ve
 std::vector<fixture> collisionPlayground() {
   std::vector<fixture> cPlayground;
   sf::Texture spike;
-  sf::Vector2f vec1(150, 150);
-  fixture fix1(false, false, spike, vec1);
+  fixture fix1(false, false, spike, 1200, 50, 0, 750);
   cPlayground.push_back(fix1);
   return cPlayground;
 }
