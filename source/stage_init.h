@@ -1,6 +1,7 @@
 //header file for stage_init
 
 const int PLAYER_SIZE = 50;
+const int STAGE_TOTAL = 1;
 
 class fixture {
   public:
@@ -8,7 +9,7 @@ class fixture {
     sf::Sprite hazard;
     bool isHazard;
     bool isWinPoint;
-    fixture(bool, bool, sf::Texture&, sf::Vector2f&);
+    fixture(bool, bool, sf::Texture&, int, int, int, int);
     sf::RectangleShape* getPlatform();
     sf::Sprite* getHazard();
 };
@@ -21,3 +22,4 @@ class player {
 };
 
 std::vector<fixture>* stageInit();
+std::vector<fixture> collisionPlayground(sf::Texture&);
