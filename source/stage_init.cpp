@@ -32,5 +32,9 @@ fixture::fixture(bool isHazard, bool isWinPoint, sf::Texture& hazardText, sf::Ve
 
 std::vector<fixture> collisionPlayground() {
   std::vector<fixture> cPlayground;
+  sf::Texture spike;
+  sf::Vector2f vec1(150, 150);
+  fixture fix1(false, false, spike, vec1);
+  cPlayground.push_back(fix1);
   return cPlayground;
 }

@@ -50,5 +50,14 @@ int main()
 }
 
 void drawGame(sf::RenderWindow& window, std::vector<fixture>* stages, player& p1, int stageOn) {
-  //draws game elements using window.draw
+
+  window.draw(p1.pSprite);
+
+  for (int i = 0;i < stages[stageOn].size();i++) {
+    if (stages[stageOn].at(i).isHazard) {
+      window.draw(stages[stageOn].at(i).hazard);
+    } else {
+      window.draw(stages[stageOn].at(i).platform);
+    }
+  }
 }
