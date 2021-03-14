@@ -1,11 +1,16 @@
 //header file for stage_init
 
+const int PLAYER_SIZE = 50;
+
 class fixture {
-  //class for storing stage fixtures
+  
 };
 
 class player {
-  //class for storing player sprite and acceleration
+  public:
+    float acceleration;
+    sf::RectangleShape pSprite;
+    player();
 };
 
 std::vector<fixture>* stageInit();
