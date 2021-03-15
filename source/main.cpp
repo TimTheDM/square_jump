@@ -5,12 +5,13 @@
 #include "gravity.h"
 #include "collision.h"
 
+const int windowHeight = 800, windowLength = 1200;
 
 void drawGame(sf::RenderWindow&, std::vector<fixture>*, player&, int);
 
 int main()
 {
-  sf::RenderWindow window(sf::VideoMode(1200, 800), "Cube Jump");
+  sf::RenderWindow window(sf::VideoMode(windowLength, windowHeight), "Cube Jump");
   window.setFramerateLimit(30);
 
   //class named fixture is what each platform, hazard, and win point is in a stage represented
@@ -34,7 +35,7 @@ int main()
     //depending on results of collision checks and existing acceleration variable
     //gravity then displaces player objects sprite member
     gravity(stages, p1, stageOn);
-    
+
     //Checks if the player object has collided with a hazard or winPoint type fixture
     //Calls a function to change player position to start point if it does, and increments stageOn
     //If the colliding fixture was a win point type
