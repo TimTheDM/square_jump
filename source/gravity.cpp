@@ -16,13 +16,13 @@ void gravity(std::vector<fixture>*, player&, int);
 void gravity(std::vector<fixture>* stages, player& p1, int stageOn) {
   //changes player objects acceleration if there was no down collision.
   //Sets to 0 if collision down or up occurs.
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !pressed/*jump command was pressed*/)
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !pressed /*jump command was pressed*/)
   {
       pressed = true;
       p1.acceleration -= (-((2 * jumpHeight)/(timeToApex * timeToApex)) + ((2 * jumpHeight)/timeToApex));
       p1.pSprite.move(0, p1.acceleration);
   }
-  if (!false /*downCollision is false for the player on current stage*/)
+  if (!downCollision(stages, p1, stageOn))
   {
       p1.acceleration -= -((2 * jumpHeight)/(timeToApex * timeToApex));
       if (p1.acceleration < maxFallRate)
@@ -39,7 +39,7 @@ void gravity(std::vector<fixture>* stages, player& p1, int stageOn) {
           pressed = false;
       }
   }
-  if (false or false /*downCollision or upCollision is true for the player on current stage*/)
+  if (downCollision(stages, p1, stageOn) or aboveCollision(stages, p1, stageOn))
   {
       p1.acceleration = 0;
       p1.pSprite.move(0, p1.acceleration);
