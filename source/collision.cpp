@@ -1,18 +1,14 @@
 #include <SFML/Graphics.hpp>
 #include<vector>
 #include "stage_init.h"
+#include "collision.h"
 //file for collision detection functions
 
-void stateCheck(std::vector<fixture>*, player&, int);
-bool aboveCollision(std::vector<fixture>*, player&, int, int&);
-bool leftCollision(std::vector<fixture>*, player&, int, int&);
-bool rightCollision(std::vector<fixture>*, player&, int, int&);
-bool downCollision(std::vector<fixture>*, player&, int, int&);
-bool isCollide(std::vector<fixture>*, player&, int, int&);
 
 void stateCheck(std::vector<fixture>* stages, player& p1, int stageOn) {
   //checks if win or hazard object is being touched
   //runs helper functions to change block to starting point
+  aboveCollision(stages, p1, stageOn, stageOn);
 }
 
 bool aboveCollision(std::vector<fixture>* stages, player& p1, int stageOn, int& boundaryDistance) {
