@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <iostream>
 #include "stage_init.h"
 #include "movement.h"
 #include "gravity.h"

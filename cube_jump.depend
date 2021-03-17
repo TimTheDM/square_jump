@@ -442,10 +442,11 @@
 	"stage_init.h"
 	"collision.h"
 
-1615695314 source:c:\projects\cube_jump\source\collision.cpp
+1615957442 source:c:\projects\cube_jump\source\collision.cpp
 	<SFML/Graphics.hpp>
 	<vector>
 	"stage_init.h"
+	"collision.h"
 
 1615938432 c:\projects\cube_jump\source\collision.h
 

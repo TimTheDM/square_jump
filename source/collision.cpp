@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include<vector>
+#include <iostream>
 #include "stage_init.h"
 #include "collision.h"
 //file for collision detection functions
@@ -8,11 +9,15 @@
 void stateCheck(std::vector<fixture>* stages, player& p1, int stageOn) {
   //checks if win or hazard object is being touched
   //runs helper functions to change block to starting point
-  aboveCollision(stages, p1, stageOn, stageOn);
 }
 
 bool aboveCollision(std::vector<fixture>* stages, player& p1, int stageOn, int& boundaryDistance) {
-  //checks if colliding fixture is above player object sprite
+  
+  for (int i = 0;i < stages[stageOn].size();i++) {
+    if (!stages[stageOn].at(i).isHazard) {
+      sf::Vector2f fixturePos = stages[stageOn].at(i).platform.getPosition();
+    }
+  }
   return false;
 }
 
@@ -32,6 +37,6 @@ bool downCollision(std::vector<fixture>* stages, player& p1, int stageOn, int& b
 }
 
 bool isCollide(std::vector<fixture>* stages, player& p1, int stageOn) {
-  //helper function to see if ANY fixtures are colliding with player sprite
+  
   return false;
 }
