@@ -15,7 +15,7 @@ std::vector<fixture>* stageInit() {
 player::player() {
   this->acceleration = 0.0;
   sf::RectangleShape pSprite(sf::Vector2f(PLAYER_SIZE, PLAYER_SIZE));
-  pSprite.setPosition(510, 354);
+  pSprite.setPosition(100, 650);
   pSprite.setFillColor(sf::Color(0, 255, 255));
   this->pSprite = pSprite;
 }

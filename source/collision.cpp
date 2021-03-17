@@ -9,15 +9,24 @@ bool isAbove(const sf::FloatRect&, const sf::FloatRect&);
 
 bool isRun = true;
 
-void stateCheck(std::vector<fixture>* stages, player& p1, int stageOn) {
+void stateCheck(std::vector<fixture>* stages, player& p1, int stageOn, sf::RenderWindow& window) {
   //checks if win or hazard object is being touched
   //runs helper functions to change block to starting point
   if (isRun) {
-    int guh = 6;
-    if (aboveCollision(stages, p1, 0, guh)) {
-      std::cout << "Collision, safe distance: " << guh;
-    }
+    sf::Mouse::setPosition(sf::Vector2i(100, 650), window);
     isRun = false;
+  }
+  sf::Vector2i t = sf::Mouse::getPosition(window);
+  bool isMove = true;
+  if (t.y < p1.pSprite.getGlobalBounds().top) {
+    int guh = p1.pSprite.getGlobalBounds().top - t.y;
+    if (aboveCollision(stages, p1, 0, guh)) {
+      isMove = false;
+      p1.pSprite.move(0, guh*-1);
+    }
+  }
+  if (isMove) {
+    p1.pSprite.setPosition(t.x, t.y);
   }
 }
 
@@ -25,7 +34,7 @@ bool aboveCollision(std::vector<fixture>* stages, player& p1, int stageOn, int& 
 
   bool canCollide = false;
   sf::FloatRect fixtureRect;
-  sf::FloatRect playerRect = p1.pSprite.getGlobalBounds();;
+  sf::FloatRect playerRect = p1.pSprite.getGlobalBounds();
 
   for (int i = 0;i < stages[stageOn].size();i++) {
 
@@ -47,7 +56,7 @@ bool aboveCollision(std::vector<fixture>* stages, player& p1, int stageOn, int& 
 bool isAbove(const sf::FloatRect& fixtureRect, const sf::FloatRect& playerRect) {
 
   if (fixtureRect.top < playerRect.top) {
-    if ((playerRect.left <= fixtureRect.left && (fixtureRect.left - playerRect.left) < 100)) {
+    if ((playerRect.left <= fixtureRect.left && (fixtureRect.left - playerRect.left) < PLAYER_SIZE)) {
       return true;
     } else if (playerRect.left >= fixtureRect.left && (playerRect.left - fixtureRect.left) < fixtureRect.width) {
       return true;
