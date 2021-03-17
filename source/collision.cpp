@@ -13,18 +13,17 @@ void stateCheck(std::vector<fixture>* stages, player& p1, int stageOn) {
   //checks if win or hazard object is being touched
   //runs helper functions to change block to starting point
   if (isRun) {
-    sf::FloatRect t1 = p1.pSprite.getGlobalBounds();
-    sf::FloatRect t2 = stages[0].at(13).hazard.getGlobalBounds();
-
-    if (isAbove(t2, t1)) {
-      std::cout << "Fixture 13 is above player";
+    int guh = 6;
+    if (aboveCollision(stages, p1, 0, guh)) {
+      std::cout << "Collision, safe distance: " << guh;
     }
     isRun = false;
   }
 }
 
 bool aboveCollision(std::vector<fixture>* stages, player& p1, int stageOn, int& boundaryDistance) {
-  
+
+  bool canCollide = false;
   sf::FloatRect fixtureRect;
   sf::FloatRect playerRect = p1.pSprite.getGlobalBounds();;
 
@@ -36,12 +35,13 @@ bool aboveCollision(std::vector<fixture>* stages, player& p1, int stageOn, int& 
     if (isAbove(fixtureRect, playerRect)) {
       int distance = playerRect.top - (fixtureRect.top + fixtureRect.height);
       if (distance < boundaryDistance) {
-        boundaryDistance -= distance;
+        if (boundaryDistance > distance) boundaryDistance = distance;
         return true;
       } 
     }
-  } 
-  return false;
+  }
+
+  return canCollide;
 }
 
 bool isAbove(const sf::FloatRect& fixtureRect, const sf::FloatRect& playerRect) {
