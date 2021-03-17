@@ -14,20 +14,20 @@ void stateCheck(std::vector<fixture>* stages, player& p1, int stageOn, sf::Rende
   //checks if win or hazard object is being touched
   //runs helper functions to change block to starting point
   if (isRun) {
-    //sf::Mouse::setPosition(sf::Vector2i(100, 650), window);
+    /*sf::Mouse::setPosition(sf::Vector2i(100, 650), window);
     sf::FloatRect fixt = stages[0].at(2).platform.getGlobalBounds();
     sf::FloatRect play = p1.pSprite.getGlobalBounds();
-
-    if (isDown(fixt, play)) {
-      std::cout << "Is down";
-    }
+    int guh = 3;
+    if (downCollision(stages, p1, 0, guh)) {
+      std::cout << "Will collide" << std::endl <<"Safe Distance to move down: " << guh;
+    }*/
     isRun = false;
   }
 
   sf::Vector2i t = sf::Mouse::getPosition(window);
   bool isMove = true;
 
-  /*sf::FloatRect h = p1.pSprite.getGlobalBounds();
+  sf::FloatRect h = p1.pSprite.getGlobalBounds();
   if (t.y < h.top) {
     int guh = h.top - t.y;
     if (aboveCollision(stages, p1, 0, guh)) {
@@ -35,17 +35,16 @@ void stateCheck(std::vector<fixture>* stages, player& p1, int stageOn, sf::Rende
       p1.pSprite.move(0, guh*-1);
     }
   } else if (t.y > h.top) {
-    int guh = 1;
+    int guh = t.y - h.top;
     if (downCollision(stages, p1, 0, guh)) {
       isMove = false;
-      std::cout << guh << std::endl;
       p1.pSprite.move(0, guh);
     }
   }
 
   if (isMove) {
     p1.pSprite.setPosition(t.x, t.y);
-  }*/
+  }
 
 }
 
@@ -83,16 +82,6 @@ bool isAbove(const sf::FloatRect& fixtureRect, const sf::FloatRect& playerRect) 
   return false;
 }
 
-bool leftCollision(std::vector<fixture>* stages, player& p1, int stageOn, int& boundaryDistance) {
-  //checks if colliding fixture is left of player object sprite
-  return false;
-}
-
-bool rightCollision(std::vector<fixture>* stages, player& p1, int stageOn, int& boundaryDistance) {
-  //checks if colliding fixture is right of player object sprite
-  return false;
-}
-
 bool downCollision(std::vector<fixture>* stages, player& p1, int stageOn, int& boundaryDistance) {
 
   bool canCollide = false;
@@ -105,9 +94,9 @@ bool downCollision(std::vector<fixture>* stages, player& p1, int stageOn, int& b
     else fixtureRect = stages[stageOn].at(i).hazard.getGlobalBounds();
     
     if (isDown(fixtureRect, playerRect)) {
-      int distance = playerRect.top - fixtureRect.top - PLAYER_SIZE;
+      int distance = fixtureRect.top - playerRect.top - PLAYER_SIZE;
       if (distance < boundaryDistance) {
-        if (boundaryDistance > distance) boundaryDistance = distance;
+        boundaryDistance = distance;
         canCollide = true;
       } 
     }
@@ -124,6 +113,16 @@ bool isDown(const sf::FloatRect& fixtureRect, const sf::FloatRect& playerRect) {
       return true;
     }
   }
+  return false;
+}
+
+bool leftCollision(std::vector<fixture>* stages, player& p1, int stageOn, int& boundaryDistance) {
+  //checks if colliding fixture is left of player object sprite
+  return false;
+}
+
+bool rightCollision(std::vector<fixture>* stages, player& p1, int stageOn, int& boundaryDistance) {
+  //checks if colliding fixture is right of player object sprite
   return false;
 }
 
