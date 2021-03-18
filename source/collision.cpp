@@ -9,13 +9,47 @@ bool isAbove(const sf::FloatRect&, const sf::FloatRect&);
 bool isDown(const sf::FloatRect&, const sf::FloatRect&);
 bool isLeft(const sf::FloatRect&, const sf::FloatRect&);
 bool isRight(const sf::FloatRect&, const sf::FloatRect&);
+bool isBeside(const sf::FloatRect&, const sf::FloatRect&);
 void startMove(player&);
 
-bool isRun = true;
-
-void stateCheck(std::vector<fixture>* stages, player& p1, int stageOn) {
+int stateCheck(std::vector<fixture>* stages, player& p1, int stageOn) {
   //checks if win or hazard object is being touched
   //runs helper functions to change block to starting point
+  sf::FloatRect playerRect = p1.pSprite.getGlobalBounds();
+  sf::FloatRect fixt;
+  
+  for (int i = 0;i < stages[stageOn].size();i++) {
+    bool isHazard = false;
+    bool isWin = false;
+    if (stages[stageOn].at(i).isHazard) {
+      fixt = stages[stageOn].at(i).hazard.getGlobalBounds();
+      isHazard = true;
+    } else if (stages[stageOn].at(i).isWinPoint) {
+      fixt = stages[stageOn].at(i).platform.getGlobalBounds();
+      isWin = true;
+    } else {
+      continue;
+    }
+
+    if (isBeside(playerRect, fixt)) {
+      if (isHazard) {
+        startMove(p1);
+        break;
+      } else if (isWin) {
+        startMove(p1);
+        return stageOn + 1;
+      }
+    }
+  }
+}
+
+bool isBeside(const sf::FloatRect& p1, const sf::FloatRect& hazard) {
+  //returns if the player is within 1 pixel of a fixture
+  return false;
+}
+
+void startMove(player& p1) {
+  p1.pSprite.setPosition(START_X, START_Y);
 }
 
 bool aboveCollision(std::vector<fixture>* stages, player& p1, int stageOn, int& boundaryDistance) {
@@ -152,8 +186,4 @@ bool isRight(const sf::FloatRect& fixtureRect, const sf::FloatRect& playerRect) 
     }
   }
   return false;
-}
-
-void startMove(player& p1) {
-  p1.pSprite.setPosition(START_X, START_Y);
 }
