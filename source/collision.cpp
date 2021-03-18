@@ -16,17 +16,17 @@ void stateCheck(std::vector<fixture>* stages, player& p1, int stageOn, sf::Rende
   //checks if win or hazard object is being touched
   //runs helper functions to change block to starting point
   if (isRun) {
-    //sf::Mouse::setPosition(sf::Vector2i(100, 650), window);
+    sf::Mouse::setPosition(sf::Vector2i(100, 650), window);/*
     sf::FloatRect fixt = stages[0].at(2).platform.getGlobalBounds();
     sf::FloatRect play = p1.pSprite.getGlobalBounds();
     int guh = 3;
-    if (isRight(fixt, play)) {
-      std::cout << "3rd fixture is right";
-    }
+    if (rightCollision(stages, p1, 0, guh)) {
+      std::cout << "Right collision at: " << guh;
+    }*/
     isRun = false;
   }
 
-  /*sf::Vector2i t = sf::Mouse::getPosition(window);
+  sf::Vector2i t = sf::Mouse::getPosition(window);
   bool isMove = true;
 
   sf::FloatRect h = p1.pSprite.getGlobalBounds();
@@ -54,9 +54,17 @@ void stateCheck(std::vector<fixture>* stages, player& p1, int stageOn, sf::Rende
     }
   }
 
+  if (t.x > h.left) {
+    int guh = t.x - h.left;
+    if (rightCollision(stages, p1, 0, guh)) {
+      isMove = false;
+      p1.pSprite.move(guh, 0);
+    }
+  }
+
   if (isMove) {
     p1.pSprite.setPosition(t.x, t.y);
-  }*/
+  }
 
 }
 
@@ -163,8 +171,26 @@ bool isLeft(const sf::FloatRect& fixtureRect, const sf::FloatRect& playerRect) {
 }
 
 bool rightCollision(std::vector<fixture>* stages, player& p1, int stageOn, int& boundaryDistance) {
-  //checks if colliding fixture is right of player object sprite
-  return false;
+
+  bool canCollide = false;
+  sf::FloatRect fixtureRect;
+  sf::FloatRect playerRect = p1.pSprite.getGlobalBounds();
+
+  for (int i = 0;i < stages[stageOn].size();i++) {
+
+    if (!stages[stageOn].at(i).isHazard) fixtureRect = stages[stageOn].at(i).platform.getGlobalBounds();
+    else fixtureRect = stages[stageOn].at(i).hazard.getGlobalBounds();
+    
+    if (isRight(fixtureRect, playerRect)) {
+      int distance = fixtureRect.left - PLAYER_SIZE - playerRect.left;
+      if (distance < boundaryDistance) {
+        boundaryDistance = distance;
+        canCollide = true;
+      } 
+    }
+  }
+
+  return canCollide;
 }
 
 bool isRight(const sf::FloatRect& fixtureRect, const sf::FloatRect& playerRect) {
