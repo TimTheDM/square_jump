@@ -6,7 +6,7 @@
 #include "gravity.h"
 #include "collision.h"
 
-
+void mouseMove(sf::RenderWindow&, std::vector<fixture>*, player&, int);
 void drawGame(sf::RenderWindow&, std::vector<fixture>*, player&, int);
 
 int main()
@@ -35,6 +35,8 @@ int main()
     //depending on results of collision checks and existing acceleration variable
     //gravity then displaces player objects sprite member
     gravity(stages, p1, stageOn);
+
+    mouseMove(window, stages, p1, stageOn);
     
     //Checks if the player object has collided with a hazard or winPoint type fixture
     //Calls a function to change player position to start point if it does, and increments stageOn
@@ -61,4 +63,8 @@ void drawGame(sf::RenderWindow& window, std::vector<fixture>* stages, player& p1
       window.draw(stages[stageOn].at(i).platform);
     }
   }
+}
+
+void mouseMove(sf::RenderWindow& window, std::vector<fixture>* stages, player& p1, int stageOn) {
+  //helper function to test collision
 }
