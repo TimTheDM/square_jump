@@ -1,4 +1,4 @@
-void stateCheck(std::vector<fixture>*, player&, int, sf::RenderWindow&);
+void stateCheck(std::vector<fixture>*, player&, int);
 bool aboveCollision(std::vector<fixture>*, player&, int, int&);
 bool leftCollision(std::vector<fixture>*, player&, int, int&);
 bool rightCollision(std::vector<fixture>*, player&, int, int&);

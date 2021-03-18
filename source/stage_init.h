@@ -1,6 +1,6 @@
 //header file for stage_init
 
-const int PLAYER_SIZE = 25;
+const int PLAYER_SIZE = 50;
 const int STAGE_TOTAL = 1;
 
 class fixture {

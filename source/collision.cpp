@@ -12,60 +12,9 @@ bool isRight(const sf::FloatRect&, const sf::FloatRect&);
 
 bool isRun = true;
 
-void stateCheck(std::vector<fixture>* stages, player& p1, int stageOn, sf::RenderWindow& window) {
+void stateCheck(std::vector<fixture>* stages, player& p1, int stageOn) {
   //checks if win or hazard object is being touched
   //runs helper functions to change block to starting point
-  if (isRun) {
-    sf::Mouse::setPosition(sf::Vector2i(100, 650), window);/*
-    sf::FloatRect fixt = stages[0].at(2).platform.getGlobalBounds();
-    sf::FloatRect play = p1.pSprite.getGlobalBounds();
-    int guh = 3;
-    if (rightCollision(stages, p1, 0, guh)) {
-      std::cout << "Right collision at: " << guh;
-    }*/
-    isRun = false;
-  }
-
-  sf::Vector2i t = sf::Mouse::getPosition(window);
-  bool isMove = true;
-
-  sf::FloatRect h = p1.pSprite.getGlobalBounds();
-  if (t.y < h.top) {
-    int guh = h.top - t.y;
-    if (aboveCollision(stages, p1, 0, guh)) {
-      isMove = false;
-      p1.pSprite.move(0, guh*-1);
-    }
-  } 
-
-  if (t.y > h.top) {
-    int guh = t.y - h.top;
-    if (downCollision(stages, p1, 0, guh)) {
-      isMove = false;
-      p1.pSprite.move(0, guh);
-    }
-  }
-
-  if (t.x < h.left) {
-    int guh = h.left - t.x;
-    if (leftCollision(stages, p1, 0, guh)) {
-      isMove = false;
-      p1.pSprite.move(guh*-1, 0);
-    }
-  }
-
-  if (t.x > h.left) {
-    int guh = t.x - h.left;
-    if (rightCollision(stages, p1, 0, guh)) {
-      isMove = false;
-      p1.pSprite.move(guh, 0);
-    }
-  }
-
-  if (isMove) {
-    p1.pSprite.setPosition(t.x, t.y);
-  }
-
 }
 
 bool aboveCollision(std::vector<fixture>* stages, player& p1, int stageOn, int& boundaryDistance) {
