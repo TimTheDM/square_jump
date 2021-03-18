@@ -15,17 +15,22 @@ void pressCheck(std::vector<fixture>* stages, player& p1, int stageOn) {
   //checks what keyboard buttons are being held down, calls sideMove or jump
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
   {
-        p1.move(-1.f,0.f);
+        p1.pSprite.move(-5.f,0.f);
   }
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
   {
-        p1.move(1.f,0.f);
+        p1.pSprite.move(5.f,0.f);
   }
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
   {
-        p1.move(0.f, 1.f);
+        p1.pSprite.move(0.f, -5.f);
+  }
+
+      if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+  {
+        p1.pSprite.move(0.f, 5.f);
   }
 }
 
