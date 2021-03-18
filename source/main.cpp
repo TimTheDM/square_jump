@@ -43,6 +43,11 @@ int main()
     //If the colliding fixture was a win point type
     stageOn = stateCheck(stages, p1, stageOn);
 
+    //If last stage is cleared, window is closed for now
+    if (stageOn >= STAGE_TOTAL) {
+      window.close();
+    }
+
     window.clear();
     //draws all game elements in their updated positions
     drawGame(window, stages, p1, stageOn);
