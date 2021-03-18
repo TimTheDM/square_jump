@@ -60,6 +60,9 @@ void leftMove(std::vector<fixture>*, player& p1, int stageOn)
 
 void jump(player&)
 {
-  //sets player objects acceleration according to Alex's Nonsense
-
+    //sets player objects acceleration according to Alex's Nonsense
+    if(downCollision())
+    {
+        p1.acceleration = 5;
+    }
 }
