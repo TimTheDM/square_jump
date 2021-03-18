@@ -32,7 +32,6 @@ int stateCheck(std::vector<fixture>* stages, player& p1, int stageOn) {
     }
 
     if (isBeside(p1, fixt)) {
-      std::cout << "Hazarded";
       if (isHazard) {
         startMove(p1);
         break;

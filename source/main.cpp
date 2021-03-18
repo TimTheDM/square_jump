@@ -6,7 +6,6 @@
 #include "gravity.h"
 #include "collision.h"
 
-void mouseMove(sf::RenderWindow&, std::vector<fixture>*, player&, int);
 void drawGame(sf::RenderWindow&, std::vector<fixture>*, player&, int);
 
 int main()
@@ -35,8 +34,6 @@ int main()
     //depending on results of collision checks and existing acceleration variable
     //gravity then displaces player objects sprite member
     gravity(stages, p1, stageOn);
-
-    mouseMove(window, stages, p1, stageOn);
     
     //Checks if the player object has collided with a hazard or winPoint type fixture
     //Calls a function to change player position to start point if it does, and increments stageOn
@@ -67,54 +64,5 @@ void drawGame(sf::RenderWindow& window, std::vector<fixture>* stages, player& p1
     } else {
       window.draw(stages[stageOn].at(i).platform);
     }
-  }
-}
-
-bool moveMouse = true;
-
-void mouseMove(sf::RenderWindow& window, std::vector<fixture>* stages, player& p1, int stageOn) {
-
-  if (moveMouse) {
-    sf::Mouse::setPosition(sf::Vector2i(100, 650), window);
-    moveMouse = false;
-  }
-  sf::Vector2i t = sf::Mouse::getPosition(window);
-  bool isMove = true;
-
-  sf::FloatRect h = p1.pSprite.getGlobalBounds();
-  if (t.y < h.top) {
-    int guh = h.top - t.y;
-    if (aboveCollision(stages, p1, 0, guh)) {
-      isMove = false;
-      p1.pSprite.move(0, guh*-1);
-    }
-  } 
-
-  if (t.y > h.top) {
-    int guh = t.y - h.top;
-    if (downCollision(stages, p1, 0, guh)) {
-      isMove = false;
-      p1.pSprite.move(0, guh);
-    }
-  }
-
-  if (t.x < h.left) {
-    int guh = h.left - t.x;
-    if (leftCollision(stages, p1, 0, guh)) {
-      isMove = false;
-      p1.pSprite.move(guh*-1, 0);
-    }
-  }
-
-  if (t.x > h.left) {
-    int guh = t.x - h.left;
-    if (rightCollision(stages, p1, 0, guh)) {
-      isMove = false;
-      p1.pSprite.move(guh, 0);
-    }
-  }
-
-  if (isMove) {
-    p1.pSprite.setPosition(t.x, t.y);
   }
 }
