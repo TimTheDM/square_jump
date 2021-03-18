@@ -9,13 +9,19 @@ bool isAbove(const sf::FloatRect&, const sf::FloatRect&);
 bool isDown(const sf::FloatRect&, const sf::FloatRect&);
 bool isLeft(const sf::FloatRect&, const sf::FloatRect&);
 bool isRight(const sf::FloatRect&, const sf::FloatRect&);
-bool isBeside(const sf::FloatRect&, const sf::FloatRect&);
+bool isBeside(player&, const sf::FloatRect&);
 void startMove(player&);
+
+bool isRun = true;
 
 int stateCheck(std::vector<fixture>* stages, player& p1, int stageOn) {
   //checks if win or hazard object is being touched
   //runs helper functions to change block to starting point
-  sf::FloatRect playerRect = p1.pSprite.getGlobalBounds();
+  if (isRun) {
+    isRun = false;
+    p1.pSprite.setPosition(100, 450);
+  }
+
   sf::FloatRect fixt;
   
   for (int i = 0;i < stages[stageOn].size();i++) {
@@ -31,7 +37,8 @@ int stateCheck(std::vector<fixture>* stages, player& p1, int stageOn) {
       continue;
     }
 
-    if (isBeside(playerRect, fixt)) {
+    if (isBeside(p1, fixt)) {
+      std::cout << "Hazarded";
       if (isHazard) {
         startMove(p1);
         break;
@@ -41,10 +48,36 @@ int stateCheck(std::vector<fixture>* stages, player& p1, int stageOn) {
       }
     }
   }
+  return stageOn;
 }
 
-bool isBeside(const sf::FloatRect& p1, const sf::FloatRect& hazard) {
-  //returns if the player is within 1 pixel of a fixture
+bool isBeside(player& p1, const sf::FloatRect& hazard) {
+  //returns if the player is within 1 pixel of 2nd arg
+  p1.pSprite.move(0, 2);
+  if (p1.pSprite.getGlobalBounds().intersects(hazard)) {
+    p1.pSprite.move(0, -2);
+    return true;
+  }
+
+  p1.pSprite.move(0, -4);
+  if (p1.pSprite.getGlobalBounds().intersects(hazard)) {
+    p1.pSprite.move(0, 2);
+    return true;
+  }
+
+  p1.pSprite.move(2, 2);
+  if (p1.pSprite.getGlobalBounds().intersects(hazard)) {
+    p1.pSprite.move(-2, 0);
+    return true;
+  }
+
+  p1.pSprite.move(-4, 0);
+  if (p1.pSprite.getGlobalBounds().intersects(hazard)) {
+    p1.pSprite.move(2, 0);
+  }
+
+  p1.pSprite.move(2, 0);
+
   return false;
 }
 
