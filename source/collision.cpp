@@ -8,6 +8,7 @@
 bool isAbove(const sf::FloatRect&, const sf::FloatRect&);
 bool isDown(const sf::FloatRect&, const sf::FloatRect&);
 bool isLeft(const sf::FloatRect&, const sf::FloatRect&);
+bool isRight(const sf::FloatRect&, const sf::FloatRect&);
 
 bool isRun = true;
 
@@ -15,17 +16,17 @@ void stateCheck(std::vector<fixture>* stages, player& p1, int stageOn, sf::Rende
   //checks if win or hazard object is being touched
   //runs helper functions to change block to starting point
   if (isRun) {
-    sf::Mouse::setPosition(sf::Vector2i(100, 650), window);
-    /*sf::FloatRect fixt = stages[0].at(2).platform.getGlobalBounds();
+    //sf::Mouse::setPosition(sf::Vector2i(100, 650), window);
+    sf::FloatRect fixt = stages[0].at(2).platform.getGlobalBounds();
     sf::FloatRect play = p1.pSprite.getGlobalBounds();
     int guh = 3;
-    if (leftCollision(stages, p1, 0, guh)) {
-      std::cout << "Left collision imminent" << std::endl << "Can safely move: " << guh;
-    }*/
+    if (isRight(fixt, play)) {
+      std::cout << "3rd fixture is right";
+    }
     isRun = false;
   }
 
-  sf::Vector2i t = sf::Mouse::getPosition(window);
+  /*sf::Vector2i t = sf::Mouse::getPosition(window);
   bool isMove = true;
 
   sf::FloatRect h = p1.pSprite.getGlobalBounds();
@@ -55,7 +56,7 @@ void stateCheck(std::vector<fixture>* stages, player& p1, int stageOn, sf::Rende
 
   if (isMove) {
     p1.pSprite.setPosition(t.x, t.y);
-  }
+  }*/
 
 }
 
@@ -163,6 +164,17 @@ bool isLeft(const sf::FloatRect& fixtureRect, const sf::FloatRect& playerRect) {
 
 bool rightCollision(std::vector<fixture>* stages, player& p1, int stageOn, int& boundaryDistance) {
   //checks if colliding fixture is right of player object sprite
+  return false;
+}
+
+bool isRight(const sf::FloatRect& fixtureRect, const sf::FloatRect& playerRect) {
+  if (fixtureRect.left >= playerRect.left+PLAYER_SIZE) {
+    if (playerRect.top < fixtureRect.top+fixtureRect.height && playerRect.top >= fixtureRect.top) {
+      return true;
+    } else if (fixtureRect.top < playerRect.top+PLAYER_SIZE && fixtureRect.top >= playerRect.top) {
+      return true;
+    }
+  }
   return false;
 }
 
