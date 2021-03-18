@@ -9,6 +9,7 @@ bool isAbove(const sf::FloatRect&, const sf::FloatRect&);
 bool isDown(const sf::FloatRect&, const sf::FloatRect&);
 bool isLeft(const sf::FloatRect&, const sf::FloatRect&);
 bool isRight(const sf::FloatRect&, const sf::FloatRect&);
+void startMove(player&);
 
 bool isRun = true;
 
@@ -153,7 +154,6 @@ bool isRight(const sf::FloatRect& fixtureRect, const sf::FloatRect& playerRect) 
   return false;
 }
 
-bool isCollide(std::vector<fixture>* stages, player& p1, int stageOn) {
-  
-  return false;
+void startMove(player& p1) {
+  p1.pSprite.setPosition(START_X, START_Y);
 }
