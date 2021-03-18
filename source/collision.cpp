@@ -15,17 +15,17 @@ void stateCheck(std::vector<fixture>* stages, player& p1, int stageOn, sf::Rende
   //checks if win or hazard object is being touched
   //runs helper functions to change block to starting point
   if (isRun) {
-    //sf::Mouse::setPosition(sf::Vector2i(100, 650), window);
-    sf::FloatRect fixt = stages[0].at(2).platform.getGlobalBounds();
+    sf::Mouse::setPosition(sf::Vector2i(100, 650), window);
+    /*sf::FloatRect fixt = stages[0].at(2).platform.getGlobalBounds();
     sf::FloatRect play = p1.pSprite.getGlobalBounds();
     int guh = 3;
-    if (isLeft(fixt, play)) {
-      std::cout << "Is left of fixture 3";
-    }
+    if (leftCollision(stages, p1, 0, guh)) {
+      std::cout << "Left collision imminent" << std::endl << "Can safely move: " << guh;
+    }*/
     isRun = false;
   }
 
-  /*sf::Vector2i t = sf::Mouse::getPosition(window);
+  sf::Vector2i t = sf::Mouse::getPosition(window);
   bool isMove = true;
 
   sf::FloatRect h = p1.pSprite.getGlobalBounds();
@@ -35,7 +35,9 @@ void stateCheck(std::vector<fixture>* stages, player& p1, int stageOn, sf::Rende
       isMove = false;
       p1.pSprite.move(0, guh*-1);
     }
-  } else if (t.y > h.top) {
+  } 
+
+  if (t.y > h.top) {
     int guh = t.y - h.top;
     if (downCollision(stages, p1, 0, guh)) {
       isMove = false;
@@ -43,9 +45,17 @@ void stateCheck(std::vector<fixture>* stages, player& p1, int stageOn, sf::Rende
     }
   }
 
+  if (t.x < h.left) {
+    int guh = h.left - t.x;
+    if (leftCollision(stages, p1, 0, guh)) {
+      isMove = false;
+      p1.pSprite.move(guh*-1, 0);
+    }
+  }
+
   if (isMove) {
     p1.pSprite.setPosition(t.x, t.y);
-  }*/
+  }
 
 }
 
@@ -118,12 +128,30 @@ bool isDown(const sf::FloatRect& fixtureRect, const sf::FloatRect& playerRect) {
 }
 
 bool leftCollision(std::vector<fixture>* stages, player& p1, int stageOn, int& boundaryDistance) {
-  //checks if colliding fixture is left of player object sprite
-  return false;
+
+  bool canCollide = false;
+  sf::FloatRect fixtureRect;
+  sf::FloatRect playerRect = p1.pSprite.getGlobalBounds();
+
+  for (int i = 0;i < stages[stageOn].size();i++) {
+
+    if (!stages[stageOn].at(i).isHazard) fixtureRect = stages[stageOn].at(i).platform.getGlobalBounds();
+    else fixtureRect = stages[stageOn].at(i).hazard.getGlobalBounds();
+    
+    if (isLeft(fixtureRect, playerRect)) {
+      int distance = playerRect.left - (fixtureRect.left + fixtureRect.width);
+      if (distance < boundaryDistance) {
+        boundaryDistance = distance;
+        canCollide = true;
+      } 
+    }
+  }
+
+  return canCollide;
 }
 
 bool isLeft(const sf::FloatRect& fixtureRect, const sf::FloatRect& playerRect) {
-  if (fixtureRect.left+fixtureRect.width < playerRect.left) {
+  if (fixtureRect.left+fixtureRect.width <= playerRect.left) {
     if (playerRect.top < fixtureRect.top+fixtureRect.height && playerRect.top >= fixtureRect.top) {
       return true;
     } else if (fixtureRect.top < playerRect.top+PLAYER_SIZE && fixtureRect.top >= playerRect.top) {
