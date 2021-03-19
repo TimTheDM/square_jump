@@ -17,13 +17,13 @@ Due to the y-axis of the window being opposite to standard, with the top being 0
 As such, the player sprite is moved in a negative acceleration (-p1.acceleration) to compensate.
 */
 
-const double jumpHeight = 320.0; //rough height the top edge of the player in pixels
+const double jumpHeight = 125.0; //rough height the top edge of the player in pixels, actual may change due to rounding error.
 const double timeToApex = 15.0; //time in game frames to reach the height of the jump
 const double maxFallRate = -2 * (-((2 * jumpHeight)/(timeToApex * timeToApex)) + ((2 * jumpHeight)/timeToApex)); //limits the maximum downward acceleration to twice the normal jump arc
 
 sf::Vector2f position;
 bool pressed = false;
-int boundaryDistance = 0;
+int boundaryDistance;
 
 void gravity(std::vector<fixture>*, player&, int);
 
@@ -33,7 +33,24 @@ void gravity(std::vector<fixture>* stages, player& p1, int stageOn) {
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !pressed /*jump command was pressed*/)
   {
       pressed = true;
-      p1.acceleration += (-((2 * jumpHeight)/(timeToApex * timeToApex)) + ((2 * jumpHeight)/timeToApex));
+      p1.acceleration = (-((2 * jumpHeight)/(timeToApex * timeToApex)) + ((2 * jumpHeight)/timeToApex));
+      boundaryDistance = p1.acceleration;
+  }
+  if (downCollision(stages, p1, stageOn, boundaryDistance) || aboveCollision(stages, p1, stageOn, boundaryDistance))
+  {
+      p1.acceleration = 0;
+      if (downCollision)
+      {
+          p1.pSprite.move(0, -boundaryDistance);
+          pressed = false;
+      }
+      if (aboveCollision)
+      {
+          p1.pSprite.move(0, boundaryDistance);
+      }
+  }
+  else
+  {
       p1.pSprite.move(0, -p1.acceleration);
   }
   if (!downCollision(stages, p1, stageOn, boundaryDistance))
@@ -43,27 +60,23 @@ void gravity(std::vector<fixture>* stages, player& p1, int stageOn) {
       {
           p1.acceleration = maxFallRate;
       }
-      //if (p1.acceleration )
-      p1.pSprite.move(0, -p1.acceleration);
+      boundaryDistance = p1.acceleration;
 
-      position = p1.pSprite.getPosition();
+      /*if (boundaryDistance > p1.acceleration)
+      {
+          p1.pSprite.move(0, -boundaryDistance);
+      }
+      else
+      {
+          p1.pSprite.move(0, -p1.acceleration);
+      }*/
+
+      /*position = p1.pSprite.getPosition();
       if (position.y > 800 - 100)
       {
           p1.pSprite.setPosition(position.x, 800 - 100);
           p1.acceleration = 0;
           pressed = false;
-      }
-  }
-  if (downCollision(stages, p1, stageOn, boundaryDistance) or aboveCollision(stages, p1, stageOn, boundaryDistance))
-  {
-      p1.acceleration = 0;
-      if (downCollision)
-      {
-          p1.pSprite.move(0, -boundaryDistance);
-      }
-      if (aboveCollision)
-      {
-          p1.pSprite.move(0, boundaryDistance);
-      }
+      }*/
   }
 }
