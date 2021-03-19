@@ -34,7 +34,7 @@ void gravity(std::vector<fixture>* stages, player& p1, int stageOn) {
   {
       pressed = true;
       p1.acceleration = (-((2 * jumpHeight)/(timeToApex * timeToApex)) + ((2 * jumpHeight)/timeToApex));
-      boundaryDistance = p1.acceleration;
+      boundaryDistance = abs(p1.acceleration);
   }
   if (downCollision(stages, p1, stageOn, boundaryDistance) || aboveCollision(stages, p1, stageOn, boundaryDistance))
   {
@@ -60,7 +60,7 @@ void gravity(std::vector<fixture>* stages, player& p1, int stageOn) {
       {
           p1.acceleration = maxFallRate;
       }
-      boundaryDistance = p1.acceleration;
+      boundaryDistance = abs(p1.acceleration);
 
       /*if (boundaryDistance > p1.acceleration)
       {
