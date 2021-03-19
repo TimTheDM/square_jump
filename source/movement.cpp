@@ -10,7 +10,6 @@
 void pressCheck(std::vector<fixture>*, player&, int);
 void leftMove(std::vector<fixture>*, player&, int);
 void rightMove(std::vector<fixture>*, player&, int);
-void jump(std::vector<fixture>*, player&, int);
 
 void pressCheck(std::vector<fixture>* stages, player& p1, int stageOn) {
   //checks what keyboard buttons are being held down, calls sideMove or jump
@@ -22,11 +21,6 @@ void pressCheck(std::vector<fixture>* stages, player& p1, int stageOn) {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
   {
         rightMove(stages, p1, stageOn);
-  }
-
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-  {
-        jump(stages, p1, stageOn);
   }
 }
 
@@ -61,15 +55,5 @@ void leftMove(std::vector<fixture>* stages, player& p1, int stageOn)
     {
         p1.pSprite.move(movePixels,0.f);
         leftCollision(stages, p1, stageOn, movePixels);
-    }
-}
-
-void jump(std::vector<fixture>* stages, player& p1, int stageOn)
-{
-    //sets player objects acceleration according to Alex's Nonsense
-    int boundaryDistance = 10;
-    if(downCollision(stages, p1, stageOn, boundaryDistance))
-    {
-        p1.acceleration = 10;
     }
 }
