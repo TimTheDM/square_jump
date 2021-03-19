@@ -8,17 +8,52 @@
 //calls movement functions, and uses functions from collision
 
 void pressCheck(std::vector<fixture>*, player&, int);
-void sideMove(char, std::vector<fixture>*, player&, int);
-void jump(player&);
+void leftMove(std::vector<fixture>*, player&, int);
+void rightMove(std::vector<fixture>*, player&, int);
 
 void pressCheck(std::vector<fixture>* stages, player& p1, int stageOn) {
   //checks what keyboard buttons are being held down, calls sideMove or jump
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+  {
+        leftMove(stages, p1, stageOn);
+  }
+
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+  {
+        rightMove(stages, p1, stageOn);
+  }
 }
 
-void sideMove(char side, std::vector<fixture>*, player& p1, int stageOn) {
-  //moves to side according to side, checking collision before displacing player
+void rightMove(std::vector<fixture>* stages, player& p1, int stageOn)
+{
+    int movePixels = 5;
+
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
+    {
+        movePixels = 9;
+        rightCollision(stages, p1, stageOn, movePixels);
+        p1.pSprite.move(movePixels,0.f);
+    }
+    else
+    {
+        rightCollision(stages, p1, stageOn, movePixels);
+        p1.pSprite.move(movePixels,0.f);
+    }
 }
 
-void jump(player&) {
-  //sets player objects acceleration according to a const I'll put somewhere
+void leftMove(std::vector<fixture>* stages, player& p1, int stageOn)
+{
+    int movePixels = 5;
+
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
+    {
+        int movePixels = 9;
+        leftCollision(stages, p1, stageOn, movePixels);
+        p1.pSprite.move((-1 * movePixels),0.f);
+    }
+    else
+    {
+        leftCollision(stages, p1, stageOn, movePixels);
+        p1.pSprite.move((-1 * movePixels),0.f);
+    }
 }

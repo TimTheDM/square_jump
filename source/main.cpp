@@ -34,7 +34,7 @@ int main()
     //depending on results of collision checks and existing acceleration variable
     //gravity then displaces player objects sprite member
     gravity(stages, p1, stageOn);
-    
+
     //Checks if the player object has collided with a hazard or winPoint type fixture
     //Calls a function to change player position to start point if it does, and increments stageOn
     //If the colliding fixture was a win point type
