@@ -2,6 +2,8 @@
 
 const int PLAYER_SIZE = 50;
 const int STAGE_TOTAL = 1;
+const int START_X = 100;
+const int START_Y = 650;
 
 class fixture {
   public:

@@ -15,7 +15,7 @@ std::vector<fixture>* stageInit() {
 player::player() {
   this->acceleration = 0.0;
   sf::RectangleShape pSprite(sf::Vector2f(PLAYER_SIZE, PLAYER_SIZE));
-  pSprite.setPosition(100, 650);
+  pSprite.setPosition(START_X, START_Y);
   pSprite.setFillColor(sf::Color(0, 255, 255));
   this->pSprite = pSprite;
 }
@@ -56,10 +56,12 @@ std::vector<fixture> collisionPlayground(sf::Texture& spike) {
   fixture fix15(true, false, spike, 0, 0, 100, 500);
   fixture fix16(true, false, spike, 0, 0, 100, 450);
   fixture fix17(true, false, spike, 0, 0, 100, 400);
+  fixture fix18(false, true, spike, 50, 50, 1050, 200);
   fix14.hazard.rotate(90);
   fix15.hazard.rotate(90);
   fix16.hazard.rotate(90);
   fix17.hazard.rotate(90);
+  fix18.platform.setFillColor(sf::Color(255,255,255));
   cPlayground.push_back(fix1);
   cPlayground.push_back(fix2);
   cPlayground.push_back(fix3);
@@ -77,5 +79,6 @@ std::vector<fixture> collisionPlayground(sf::Texture& spike) {
   cPlayground.push_back(fix15);
   cPlayground.push_back(fix16);
   cPlayground.push_back(fix17);
+  cPlayground.push_back(fix18);
   return cPlayground;
 }

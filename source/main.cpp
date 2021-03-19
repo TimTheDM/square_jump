@@ -1,10 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <iostream>
 #include "stage_init.h"
 #include "movement.h"
 #include "gravity.h"
 #include "collision.h"
-
 
 void drawGame(sf::RenderWindow&, std::vector<fixture>*, player&, int);
 
@@ -38,7 +38,12 @@ int main()
     //Checks if the player object has collided with a hazard or winPoint type fixture
     //Calls a function to change player position to start point if it does, and increments stageOn
     //If the colliding fixture was a win point type
-    stateCheck(stages, p1, stageOn);
+    stageOn = stateCheck(stages, p1, stageOn);
+
+    //If last stage is cleared, window is closed for now
+    if (stageOn >= STAGE_TOTAL) {
+      window.close();
+    }
 
     window.clear();
     //draws all game elements in their updated positions
