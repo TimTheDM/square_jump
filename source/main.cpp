@@ -6,11 +6,14 @@
 #include "gravity.h"
 #include "collision.h"
 
+const int WINDOW_LENGTH = 1200;
+const int WINDOW_HEIGHT = 800;
+
 void drawGame(sf::RenderWindow&, std::vector<fixture>*, player&, int);
 
 int main()
 {
-  sf::RenderWindow window(sf::VideoMode(1200, 800), "Cube Jump");
+  sf::RenderWindow window(sf::VideoMode(WINDOW_LENGTH, WINDOW_HEIGHT), "Cube Jump");
   window.setFramerateLimit(30);
 
   //class named fixture is what each platform, hazard, and win point is in a stage represented
