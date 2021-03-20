@@ -56,7 +56,7 @@ std::vector<fixture> collisionPlayground(sf::Texture& spike) {
   fixture fix15(true, false, spike, 0, 0, 100, 500);
   fixture fix16(true, false, spike, 0, 0, 100, 450);
   fixture fix17(true, false, spike, 0, 0, 100, 400);
-  fixture fix18(false, true, spike, 50, 50, 1050, 200);
+  fixture fix18(false, true, spike, 50, 50, 1050, 300);
   fix14.hazard.rotate(90);
   fix15.hazard.rotate(90);
   fix16.hazard.rotate(90);

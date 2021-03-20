@@ -1,6 +1,6 @@
 //header file for stage_init
 
-const int PLAYER_SIZE = 50;
+const int PLAYER_SIZE = 25;
 const int STAGE_TOTAL = 1;
 const int START_X = 100;
 const int START_Y = 650;
@@ -18,7 +18,7 @@ class fixture {
 
 class player {
   public:
-    int acceleration;
+    float acceleration;
     sf::RectangleShape pSprite;
     player();
 };
