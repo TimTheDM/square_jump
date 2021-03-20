@@ -26,34 +26,14 @@ void pressCheck(std::vector<fixture>* stages, player& p1, int stageOn) {
 
 void rightMove(std::vector<fixture>* stages, player& p1, int stageOn)
 {
-    int movePixels = 5;
-
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
-    {
-        movePixels = 9;
-        rightCollision(stages, p1, stageOn, movePixels);
-        p1.pSprite.move(movePixels,0.f);
-    }
-    else
-    {
-        rightCollision(stages, p1, stageOn, movePixels);
-        p1.pSprite.move(movePixels,0.f);
-    }
+    int movePixels = 9;
+    rightCollision(stages, p1, stageOn, movePixels);
+    p1.pSprite.move(movePixels,0.f);
 }
 
 void leftMove(std::vector<fixture>* stages, player& p1, int stageOn)
 {
-    int movePixels = 5;
-
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
-    {
-        int movePixels = 9;
-        leftCollision(stages, p1, stageOn, movePixels);
-        p1.pSprite.move((-1 * movePixels),0.f);
-    }
-    else
-    {
-        leftCollision(stages, p1, stageOn, movePixels);
-        p1.pSprite.move((-1 * movePixels),0.f);
-    }
+    int movePixels = 9;
+    leftCollision(stages, p1, stageOn, movePixels);
+    p1.pSprite.move((-1 * movePixels),0.f);
 }
