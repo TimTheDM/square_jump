@@ -39,12 +39,12 @@ void gravity(std::vector<fixture>* stages, player& p1, int stageOn) {
   if (downCollision(stages, p1, stageOn, boundaryDistance) || aboveCollision(stages, p1, stageOn, boundaryDistance))
   {
       p1.acceleration = 0;
-      if (downCollision)
+      if (downCollision(stages, p1, stageOn, boundaryDistance))
       {
           p1.pSprite.move(0, -boundaryDistance);
           pressed = false;
       }
-      if (aboveCollision)
+      if (aboveCollision(stages, p1, stageOn, boundaryDistance))
       {
           p1.pSprite.move(0, boundaryDistance);
       }
@@ -61,22 +61,5 @@ void gravity(std::vector<fixture>* stages, player& p1, int stageOn) {
           p1.acceleration = maxFallRate;
       }
       boundaryDistance = abs(p1.acceleration);
-
-      /*if (boundaryDistance > p1.acceleration)
-      {
-          p1.pSprite.move(0, -boundaryDistance);
-      }
-      else
-      {
-          p1.pSprite.move(0, -p1.acceleration);
-      }*/
-
-      /*position = p1.pSprite.getPosition();
-      if (position.y > 800 - 100)
-      {
-          p1.pSprite.setPosition(position.x, 800 - 100);
-          p1.acceleration = 0;
-          pressed = false;
-      }*/
   }
 }
