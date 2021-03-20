@@ -92,7 +92,7 @@ bool aboveCollision(std::vector<fixture>* stages, player& p1, int stageOn, int& 
     
     if (isAbove(fixtureRect, playerRect)) {
       int distance = playerRect.top - (fixtureRect.top + fixtureRect.height);
-      if (distance < boundaryDistance) {
+      if (distance <+ boundaryDistance) {
         if (boundaryDistance > distance) boundaryDistance = distance;
         canCollide = true;
       } 
@@ -126,7 +126,7 @@ bool downCollision(std::vector<fixture>* stages, player& p1, int stageOn, int& b
     
     if (isDown(fixtureRect, playerRect)) {
       int distance = fixtureRect.top - playerRect.top - PLAYER_SIZE;
-      if (distance < boundaryDistance) {
+      if (distance <= boundaryDistance) {
         boundaryDistance = distance;
         canCollide = true;
       } 

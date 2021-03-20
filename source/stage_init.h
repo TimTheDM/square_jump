@@ -18,7 +18,7 @@ class fixture {
 
 class player {
   public:
-    float acceleration;
+    int acceleration;
     sf::RectangleShape pSprite;
     player();
 };
