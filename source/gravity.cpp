@@ -62,5 +62,6 @@ void gravity(std::vector<fixture>* stages, player& p1, int stageOn) {
           p1.acceleration = maxFallRate;
       }
       boundaryDistance = abs(p1.acceleration);
+      pressed = true;
   }
 }
