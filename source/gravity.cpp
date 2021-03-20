@@ -18,13 +18,13 @@ As such, the player sprite is moved in a negative acceleration (-p1.acceleration
 */
 
 const double jumpHeight = 200.0; //rough height the top edge of the player in pixels, actual may change due to rounding error.
-const double timeToApex = 15.0; //time in game frames to reach the height of the jump
-const double maxFallRate = -2 * (-((2 * jumpHeight)/(timeToApex * timeToApex)) + ((2 * jumpHeight)/timeToApex)); //limits the maximum downward acceleration to twice the normal jump arc
+const double timeToApex = 20.0; //time in game frames to reach the height of the jump
+const double maxFallRate = -1.5 * (-((2 * jumpHeight)/(timeToApex * timeToApex)) + ((2 * jumpHeight)/timeToApex)); //limits the maximum downward acceleration to twice the normal jump arc
 
 sf::Vector2f position;
 bool pressed = false;
 int boundaryDistance;
-bool downC, upC;
+//bool downC, upC;
 
 void gravity(std::vector<fixture>*, player&, int);
 
@@ -35,7 +35,7 @@ void gravity(std::vector<fixture>* stages, player& p1, int stageOn) {
   {
       pressed = true;
       p1.acceleration = (-((2 * jumpHeight)/(timeToApex * timeToApex)) + ((2 * jumpHeight)/timeToApex));
-      boundaryDistance = abs(p1.acceleration);
+      boundaryDistance = abs(static_cast<int>(p1.acceleration));
   }
   //downC = downCollision(stages, p1, stageOn, boundaryDistance);
   //upC = aboveCollision(stages, p1, stageOn, boundaryDistance);
@@ -52,16 +52,23 @@ void gravity(std::vector<fixture>* stages, player& p1, int stageOn) {
   }
   else
   {
-      p1.pSprite.move(0, -p1.acceleration);
+      p1.pSprite.move(0, -static_cast<int>(p1.acceleration));
   }
   if (!downCollision(stages, p1, stageOn, boundaryDistance))
   {
-      p1.acceleration += -((2 * jumpHeight)/(timeToApex * timeToApex));
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && p1.acceleration > 0)
+      {
+          p1.acceleration += -((2 * jumpHeight)/(timeToApex * timeToApex));
+      }
+      else
+      {
+          p1.acceleration += -2 * ((2 * jumpHeight)/(timeToApex * timeToApex));
+      }
       if (p1.acceleration < maxFallRate)
       {
           p1.acceleration = maxFallRate;
       }
-      boundaryDistance = abs(p1.acceleration);
+      boundaryDistance = abs(static_cast<int>(p1.acceleration));
       pressed = true;
   }
 }
